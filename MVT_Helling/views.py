@@ -3,7 +3,9 @@ from datetime import datetime
 from django.shortcuts import render
 
 def inicio(request):
-    return HttpResponse("Inicio Programaciones") 
+    return HttpResponse("Bienvenidos a Planificación de Vuelos AEP") 
 
+
+#en vez de base va programacion
 def programaciones(request):
-    return render(request, 'programacion.html', context={})
+    return render(request, 'base.html', context={})
