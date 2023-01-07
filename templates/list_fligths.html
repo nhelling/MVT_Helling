@@ -4,17 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Listado de Vuelos</title>
 </head>
 <body>
+   
+
     <h1>Lista de Vuelos:</h1>
     {% for vuelo in flights %}
-        <p>{{vuelo.aeropuerto}} , {{vuelo.tipo}} , {{vuelo.cia_vuelo}} , {{vuelo.acft}} , {{vuelo.fecha_hora}} , {{vuelo.ruta}} , {{vuelo.observacion}} , {{vuelo.clase}} , {{vuelo.cia}} , {{vuelo.pax}}    </p>
-        {% if vuelo.cia == 'AR' %}
-            <p>Vuelo operado por Aerolineas Argentinas </p>
-        {% else %}
-        <p>Vuelo operado por otra empresa aerea </p>
-        {% endif %}
+    <div class="card" style="width: 18rem;">
+        <img src="data:image/jpeg;base64,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" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{vuelo.aeropuerto}},{{vuelo.tipo}},{{vuelo.cia_vuelo}},{{vuelo.fecha_hora}},{{vuelo.ruta}} </h5>
+          <p class="card-text">{{vuelo.observacion}} , {{vuelo.clase}},{{vuelo.acft}} , {{vuelo.cia}} , {{vuelo.pax}}</p>
+            {% if vuelo.cia == 'AR' %}
+                <p>Vuelo operado por Aerolineas Argentinas </p>
+            {% else %}
+                <p>Vuelo operado por otra empresa aerea </p>
+            {% endif %}
+          <a href="#" class="btn btn-primary">Cargar PAX</a>
+        </div>
+      </div>       
+       
     {% endfor %}
     
 </body>
