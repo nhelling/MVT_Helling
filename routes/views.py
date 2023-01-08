@@ -1,8 +1,25 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+from routes.models import Route
 
 def create_route(request):
-    pass
+    new_route = Route.objects.create(route = 'Cordoba', iata_code='COR', nature = True )
+    print(new_route)
+    return HttpResponse('Se ha cargado la nueva ruta')
 
 
 def list_routes(request):
-    pass
+    all_routes = Route.objects.all()    
+    print(all_routes)
+    context = {
+        'routes':all_routes,
+    }
+    return render(request, 'routes.html', context=context)
+    
+
+
+    
+    
+
+
+
