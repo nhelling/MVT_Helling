@@ -1,6 +1,13 @@
 from django.db import models
 
 class Fleet(models.Model):
-    aircraft = models.CharField(max_length=50)
-    iata_code = models.CharField(max_length=3)
-    seats = models.IntegerField()
+    aircraft = models.CharField(max_length=50, verbose_name= 'Aeronave')
+    iata_code = models.CharField(max_length=3, verbose_name= 'Codigo IATA')
+    seats = models.IntegerField(verbose_name= 'Capacidad')
+    
+    def __str__(self):
+        return self.aircraft
+    
+    class Meta:
+        verbose_name = 'Flota'
+        verbose_name_plural = 'Aeronaves'
