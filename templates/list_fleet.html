@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}
+Listado de Flota
+{% endblock %} 
+{% block content %}  
+
+  <h1>Lista de Aeronaves:</h1>
+  <h2>Crear Nueva Aeronave <h2> <a href="/fleet/create_fleet/" class="btn btn-primary">Cargar Aeronave</a>
+  
+    {% for vuelo in fleets %}
+  <div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+       <div class="card-body">
+          
+          <p class="card-text">Empresa: {{vuelo.aircraft}}</p>
+          <p class="card-text">Codigo IATA: {{vuelo.iata_code}}</p>
+          <p class="card-text">Configuración: {{vuelo.seats}}</p>
+            
+          <a href="#" class="btn btn-primary">Cargar PAX</a>
+        </div>
+      </div> 
+    {% endfor %}
+    {% endblock %} 

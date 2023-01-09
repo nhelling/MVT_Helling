@@ -1,16 +1,8 @@
 {% extends 'base.html' %}
-
 {% block title %}
-
 Listado de Vuelos
-
 {% endblock %} 
-
-{% block content %}
-
-    
-
-    
+{% block content %}  
 
   <h1>Lista de Vuelos:</h1>
   <h2>Crear Nuevo Vuelo <h2> <a href="/flights/create_fligth/" class="btn btn-primary">Cargar Vuelo</a>
@@ -35,9 +27,7 @@ Listado de Vuelos
             {% endif %}
           <a href="#" class="btn btn-primary">Cargar PAX</a>
         </div>
-      </div>  
-    
-       
+      </div> 
     {% endfor %}
     {% endblock %}   
     

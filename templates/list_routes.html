@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}
+Listado de Rutas
+{% endblock %} 
+{% block content %}  
+
+  <h1>Lista de Rutas:</h1>
+  <h2>Crear Nueva Ruta <h2> <a href="/routes/create_route/" class="btn btn-primary">Cargar Ruta</a>
+  
+    {% for vuelo in routes %}
+  <div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+       <div class="card-body">
+          
+          <p class="card-text">Ruta: {{vuelo.route}}</p>
+          <p class="card-text">Codigo IATA: {{vuelo.iata_code}}</p>
+          {% if vuelo.domestico == True %}
+          <p>Es una ruta domestica</p>
+        {% else %}
+          <p>Es una ruta internacional </p>
+        {% endif %}
+          
+            
+          <a href="#" class="btn btn-primary">Cargar Ruta</a>
+        </div>
+      </div> 
+    {% endfor %}
+    {% endblock %} 

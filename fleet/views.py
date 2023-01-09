@@ -2,14 +2,32 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from fleet.models import Fleet
 
+from fleet.forms import FleetForm
+
 def create_fleet(request):
     if request.method == 'GET':
-        return render(request, 'create_fleet.html', context = {})
+        context = {
+            'form' : FleetForm()
+        }
+        return render(request, 'create_fleet.html', context = context)    
     elif request.method == 'POST':
-        Fleet.objects.create(aircraft = request.POST['aircraft'],iata_code = request.POST['iata_code'], seats = request.POST['seats'] )
-        return render(request, 'create_fleet.html', context = {})
-    
-    
+        form = FleetForm(request.POST)
+        if form.is_valid():
+            Fleet.objects.create(aircraft= form.cleaned_data['aircraft'],
+                iata_code =form.cleaned_data['iata_code'], 
+                seats = form.cleaned_data['seats'],               
+                
+            )
+            context = {
+                'message': 'Aeronave creada exitosamente'
+            }        
+            return render(request, 'create_fleet.html', context = context)
+        else:
+            context = {
+                'form_errors':form.errors,
+                'form': FleetForm()
+            }   
+            return render(request, 'create_fleet.html', context = context)
 
 
 def list_fleet(request):
@@ -18,7 +36,7 @@ def list_fleet(request):
     context = {
         'fleets':all_fleet,        
     }
-    return render(request, 'fleet.html', context=context)
+    return render(request, 'list_fleet.html', context=context)
 
 
 
