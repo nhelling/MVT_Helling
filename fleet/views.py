@@ -3,8 +3,13 @@ from django.http import HttpResponse
 from fleet.models import Fleet
 
 def create_fleet(request):
-    new_fleet = Fleet.objects.create(aircraft="Boeing 738",iata_code="738", seats = 186 )
-    return HttpResponse('Se ha cargado la nueva aeronave')
+    if request.method == 'GET':
+        return render(request, 'create_fleet.html', context = {})
+    elif request.method == 'POST':
+        Fleet.objects.create(aircraft = request.POST['aircraft'],iata_code = request.POST['iata_code'], seats = request.POST['seats'] )
+        return render(request, 'create_fleet.html', context = {})
+    
+    
 
 
 def list_fleet(request):
@@ -14,6 +19,9 @@ def list_fleet(request):
         'fleets':all_fleet,        
     }
     return render(request, 'fleet.html', context=context)
+
+
+
 
 
 

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Crear Flota
+
+{% endblock %} 
+
+{% block content %}
+    <h1>   Crear Flota </h1>
+
+    {% if request.method == "GET" %}
+    
+        <form action ="" method = "POST">
+            
+        {% csrf_token %}
+            
+            <p> Aircraft: <input type = "text" name = "aircraft"> </p>
+            <p> IATA_code: <input type = "text" name = "iata_code"> </p>
+            <p> seats: <input type = "number" name = "seats"> </p>
+
+            <input type="submit" value = "Crear Acft">
+        </form>
+
+    {% else %}
+        <p> Aeronave Creada </p>
+
+    {% endif %}
+
+
+    
+{% endblock %}
+
+
+

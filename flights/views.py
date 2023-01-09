@@ -2,11 +2,40 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from flights.models import Fligths
 
-def create_fligth(request):
-    new_fligth =  Fligths.objects.create(aeropuerto='AEP', tipo='Partida',cia_vuelo='FO3114', acft='738', fecha_hora='11/12/2022 14:12:00', ruta='USH', observacion='n/a', clase='F', cia='FO', pax=147)
-    print(new_fligth)
-    return HttpResponse('Se ha cargado el nuevo vuelo')
+from flights.forms import FlightForm
 
+def create_fligth(request):
+    if request.method == 'GET':
+        context = {
+            'form' : FlightForm()
+        }
+        return render(request, 'create_flight.html', context = context)
+    
+    elif request.method == 'POST':
+        form = FlightForm(request.POST)
+        if form.is_valid():
+            Fligths.objects.create(aeropuerto = form.cleaned_data['aeropuerto'],
+                tipo=form.cleaned_data['tipo'],
+                cia_vuelo = form.cleaned_data['cia_vuelo'],
+                acft = form.cleaned_data['acft'],
+                fecha_hora = form.cleaned_data['fecha_hora'],
+                ruta = form.cleaned_data['ruta'],
+                observacion = form.cleaned_data['observacion'],
+                clase = form.cleaned_data['clase'],
+                cia = form.cleaned_data['cia'],
+                pax = form.cleaned_data['pax'],
+            )   
+            context = {
+                'message': 'Vuelo creado exitosamente'
+            }
+            return render(request, 'create_flight.html', context = context)       
+        else:
+            context = {
+                'form_errors':form.errors,
+                'form': FlightForm()
+            }   
+            return render(request, 'create_flight.html', context = context)
+        
 
 def list_fligths(request):
     all_flights = Fligths.objects.all()    
