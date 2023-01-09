@@ -12,12 +12,12 @@ Listado de Rutas
     <img src="..." class="card-img-top" alt="...">
        <div class="card-body">
           
-          <p class="card-text">Ruta: {{vuelo.route}}</p>
-          <p class="card-text">Codigo IATA: {{vuelo.iata_code}}</p>
+          <p class="card-text"><h5>Ruta: {{vuelo.route}}</h5></p>
+          <p class="card-text"><h5>Codigo IATA: {{vuelo.iata_code}}</h5></p>
           {% if vuelo.domestico == True %}
-          <p>Es una ruta domestica</p>
+          <p><h5>Es una ruta domestica</h5></p>
         {% else %}
-          <p>Es una ruta internacional </p>
+          <p><h5>Es una ruta internacional</h5> </p>
         {% endif %}
           
             
