@@ -38,9 +38,13 @@ def create_fligth(request):
         
 
 def list_fligths(request):
-    all_flights = Fligths.objects.all()    
-    print(all_flights)
+    if 'search' in request.GET:
+        search = request.GET['search']
+        flights = Fligths.objects.filter(cia_vuelo__contains = search)
+    else:
+        flights = Fligths.objects.all()    
+    #print(all_flights)
     context = {
-        'flights':all_flights,
+        'flights':flights,
     }
     return render(request, 'list_fligths.html', context=context)
