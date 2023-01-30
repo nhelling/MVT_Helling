@@ -85,15 +85,15 @@ def update_flight(request,pk):
     elif request.method == 'POST':
         form = FlightForm(request.POST)
         if form.is_valid():            
-            flight.aeropuerto = form.cleaned_data['aeropuerto'],
-            flight.tipo = form.cleaned_data['tipo'],
-            flight.cia_vuelo = form.cleaned_data['cia_vuelo'],
-            flight.acft = form.cleaned_data['acft'],
-            flight.fecha_hora = form.cleaned_data['fecha_hora'],
-            flight.ruta = form.cleaned_data['ruta'],
-            flight.observacion = form.cleaned_data['observacion'],
-            flight.clase = form.cleaned_data['clase'],
-            flight.cia = form.cleaned_data['cia'],
+            flight.aeropuerto = form.cleaned_data['aeropuerto']
+            flight.tipo = form.cleaned_data['tipo']
+            flight.cia_vuelo = form.cleaned_data['cia_vuelo']
+            flight.acft = form.cleaned_data['acft']
+            flight.fecha_hora = form.cleaned_data['fecha_hora']
+            flight.ruta = form.cleaned_data['ruta']
+            flight.observacion = form.cleaned_data['observacion']
+            flight.clase = form.cleaned_data['clase']
+            flight.cia = form.cleaned_data['cia']
             flight.pax = form.cleaned_data['pax']
             flight.save()  
             context = {

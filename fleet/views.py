@@ -57,8 +57,8 @@ def update_fleet(request,pk):
     elif request.method == 'POST':
         form = FleetForm(request.POST)
         if form.is_valid():
-            fleet.aircraft= form.cleaned_data['aircraft'],
-            fleet.iata_code =form.cleaned_data['iata_code'], 
+            fleet.aircraft= form.cleaned_data['aircraft']
+            fleet.iata_code =form.cleaned_data['iata_code']
             fleet.seats = form.cleaned_data['seats']               
             fleet.save()    
             

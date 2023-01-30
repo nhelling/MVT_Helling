@@ -41,6 +41,7 @@ def list_routes(request):
     
 def update_route(request, pk):
     route = Route.objects.get(id=pk)
+    
     if request.method == 'GET':
         context = {
             'form' : RouteForm(
@@ -53,13 +54,14 @@ def update_route(request, pk):
             )
         }
         return render(request, 'update_route.html', context = context)    
+    
     elif request.method == 'POST':
         form = RouteForm(request.POST)
         if form.is_valid():
-            route.route= form.cleaned_data['route'],
-            route.iata_code =form.cleaned_data['iata_code'], 
-            route.domestico = form.cleaned_data['domestico'], 
-            route.internacional = form.cleaned_data['internacional']             
+            route.route= form.cleaned_data['route']
+            route.iata_code =form.cleaned_data['iata_code']
+            route.domestico = form.cleaned_data['domestico']
+            route.internacional = form.cleaned_data['internacional']          
             route.save()    
             
             context = {
