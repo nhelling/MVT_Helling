@@ -8,4 +8,3 @@ urlpatterns = [
     path('delete_route/<int:pk>/',RouteDeleteView.as_view()),
     
 ]
-
