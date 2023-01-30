@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from routes.models import Route
+from django.views.generic import  DeleteView
 
+from routes.models import Route
 from routes.forms import RouteForm
 
 def create_route(request):
@@ -22,13 +23,13 @@ def create_route(request):
             context = {
                 'message': 'Ruta creada exitosamente'
             }        
-            return render(request, 'create_route.html', context = context)
+            
         else:
             context = {
                 'form_errors':form.errors,
                 'form': RouteForm()
             }   
-            return render(request, 'create_route.html', context = context)
+        return render(request, 'create_route.html', context = context)
     
 def list_routes(request):
     all_routes = Route.objects.all()    
@@ -38,9 +39,44 @@ def list_routes(request):
     }
     return render(request, 'list_routes.html', context=context)
     
+def update_route(request, pk):
+    route = Route.objects.get(id=pk)
+    if request.method == 'GET':
+        context = {
+            'form' : RouteForm(
+                initial={
+                'route': route.route,
+                'iata_code': route.iata_code ,
+                'domestico': route.domestico , 
+                'internacional': route.internacional ,
+                }                
+            )
+        }
+        return render(request, 'update_route.html', context = context)    
+    elif request.method == 'POST':
+        form = RouteForm(request.POST)
+        if form.is_valid():
+            route.route= form.cleaned_data['route'],
+            route.iata_code =form.cleaned_data['iata_code'], 
+            route.domestico = form.cleaned_data['domestico'], 
+            route.internacional = form.cleaned_data['internacional']             
+            route.save()    
+            
+            context = {
+                'message': 'Ruta actualizada exitosamente'
+            }        
+            
+        else:
+            context = {
+                'form_errors':form.errors,
+                'form': RouteForm()
+            }   
+        return render(request, 'update_route.html', context = context)
 
-
-    
+class RouteDeleteView(DeleteView):
+    model = Route
+    template_name = 'delete_route.html'
+    success_url = '/routes/list_routes/'   
     
 
 

@@ -10,13 +10,14 @@ Listado de Flota
     {% for vuelo in fleets %}
   <div class="card" style="width: 18rem;">
     <img src="..." class="card-img-top" alt="...">
-       <div class="card-body">
+      <div class="card-body">
           
           <p class="card-text"><h5>Empresa: {{vuelo.aircraft}}</h5></p>
           <p class="card-text"><h5>Codigo IATA: {{vuelo.iata_code}}</h5></p>
           <p class="card-text"><h5>Configuración: {{vuelo.seats}}</h5></p>
             
-         
+          <a href="/fleet/update_fleet/{{vuelo.id}}/" class="btn btn-primary">Actualizar</a> 
+          <a href="/fleet/delete_fleet/{{vuelo.id}}/" class="btn btn-danger">Eliminar</a> 
         </div>
       </div> 
     {% endfor %}
