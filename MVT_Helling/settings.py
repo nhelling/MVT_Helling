@@ -39,6 +39,7 @@ MY_APPS = [
     'flights',
     'fleet',
     'routes',
+    'users',
 ]
 
 BASE_APPS = [

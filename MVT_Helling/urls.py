@@ -12,5 +12,5 @@ urlpatterns = [
     path('fleet/', include ('fleet.url')),
     path('flights/', include('flights.url')),
     path('routes/', include('routes.url')),
-    
+    path('users/', include('users.url')),
 ]
