@@ -22,6 +22,9 @@ Register
 
     {% endif %}
 
-    
+    {% if errors%}    
+    <h3 style = "color: red"> {{errors}}  </h3>               
+        
+    {% endif %}
     
 {% endblock %}

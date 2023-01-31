@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login,  authenticate
 
@@ -43,7 +43,10 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            context = {
-                'form': AuthenticationForm()
-            }
-            return render(request, 'users/login.html', context=context )
+            return redirect('login')
+        
+        context = {
+            'errors':form.errors,
+            'form': UserCreationForm()
+        }
+        return render(request, 'users/register.html', context=context)
