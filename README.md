@@ -11,3 +11,6 @@ FUNCIONALIDAD: la idea del proyecto es crear una plataforma para poder tener una
 FRONT: Luca, no soy amigo del front, así que no será muy lindo el proyecto pero funciona todo.
 
 Carpeta TEMPLATE: originalmente pensé que no era necesario separarla en subcarpetas por app, ya que utilicé un critero para nombrar a todos los html similares. Pero en mis próximos proyectos, es algo que implementaré.
+
+
+VISTAS: para crear un vuelo, una ruta o una aeronave, hay que estar logueado y ser superusuario. Para acceder a las listas de vuelos, aeronaves y flotas, hay que estear logueado solamente.
