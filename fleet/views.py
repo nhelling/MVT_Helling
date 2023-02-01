@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import DeleteView
+from django.contrib.auth.decorators import login_required
 
 from fleet.models import Fleet
 from fleet.forms import FleetForm
@@ -31,6 +32,7 @@ def create_fleet(request):
         return render(request, 'create_fleet.html', context = context)
 
 
+@login_required
 def list_fleet(request):
     all_fleet = Fleet.objects.all()
     print(all_fleet)

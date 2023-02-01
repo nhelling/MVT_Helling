@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import  DeleteView
+from django.contrib.auth.decorators import login_required
 
 from routes.models import Route
 from routes.forms import RouteForm
@@ -30,7 +31,8 @@ def create_route(request):
                 'form': RouteForm()
             }   
         return render(request, 'create_route.html', context = context)
-    
+
+@login_required
 def list_routes(request):
     all_routes = Route.objects.all()    
     print(all_routes)

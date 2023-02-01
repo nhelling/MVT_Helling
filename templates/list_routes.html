@@ -5,7 +5,11 @@ Listado de Rutas
 {% block content %}  
 
   <h1>Lista de Rutas:</h1>
-  <h2>Crear Nueva Ruta <h2> <a href="/routes/create_route/" class="btn btn-primary">Cargar Ruta</a>
+  {% if request.user.is_authenticated%}
+    {%if request.user.is_superuser%}
+      <h2>Crear Nueva Ruta <h2> <a href="/routes/create_route/" class="btn btn-primary">Cargar Ruta</a>
+    {% endif %}
+  {% endif %}
   
     {% for vuelo in routes %}
   <div class="card" style="width: 18rem;">

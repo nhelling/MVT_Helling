@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import ListView, CreateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from flights.models import Fligths
 from flights.forms import FlightForm
@@ -54,7 +55,8 @@ def list_fligths(request):
     }
     return render(request, 'list_fligths.html', context=context)
 
-class FlightsListView(ListView):
+
+class FlightsListView(LoginRequiredMixin, ListView):
     model = Fligths
     template_name = 'list_fligths.html'
     
