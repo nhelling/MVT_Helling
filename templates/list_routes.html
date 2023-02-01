@@ -11,8 +11,10 @@ Listado de Rutas
     {% endif %}
   {% endif %}
   
+  <div class="row row-cols-1 row-cols-md-3">
     {% for vuelo in routes %}
-  <div class="card" style="width: 18rem;">
+    <div class="col mb-4">
+  <div class="card text-center" style="width: 18rem;">
     <img src="..." class="card-img-top" alt="...">
        <div class="card-body">
           
@@ -29,5 +31,7 @@ Listado de Rutas
         <a href="/routes/delete_route/{{vuelo.id}}/" class="btn btn-danger">Eliminar</a> 
         </div>
       </div> 
+    </div> 
     {% endfor %}
+  </div> 
     {% endblock %} 
