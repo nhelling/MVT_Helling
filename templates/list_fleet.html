@@ -7,13 +7,17 @@ Listado de Flota
   <h1>Lista de Aeronaves:</h1>
   {% if request.user.is_authenticated%}
     {%if request.user.is_superuser%}
-      <h2>Crear Nueva Aeronave <h2> <a href="/fleet/create_fleet/" class="btn btn-primary">Cargar Aeronave</a>
+      <a href="/fleet/create_fleet/" class="btn btn-primary">Cargar Aeronave</a>
+      <p> </p>
+      <p> </p>
+      <p> </p>
     {% endif %}
   {% endif %}
   
   <div class="row row-cols-1 row-cols-md-3">
     {% for vuelo in fleets %}
     <div class="col mb-4">
+      
       <div class="card text-center" style="width: 18rem;">
         
         <img src="..." class="card-img-top" alt="...">
@@ -27,6 +31,7 @@ Listado de Flota
             <a href="/fleet/delete_fleet/{{vuelo.id}}/" class="btn btn-danger">Eliminar</a> 
           </div>
         </div> 
+      
         </div>  
     
     {% endfor %}

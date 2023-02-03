@@ -7,7 +7,10 @@ Listado de Rutas
   <h1>Lista de Rutas:</h1>
   {% if request.user.is_authenticated%}
     {%if request.user.is_superuser%}
-      <h2>Crear Nueva Ruta <h2> <a href="/routes/create_route/" class="btn btn-primary">Cargar Ruta</a>
+      <a href="/routes/create_route/" class="btn btn-primary">Cargar Ruta</a>
+      <p> </p>
+      <p> </p>
+      <p> </p>
     {% endif %}
   {% endif %}
   
