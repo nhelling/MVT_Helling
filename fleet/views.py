@@ -11,14 +11,16 @@ def create_fleet(request):
         context = {
             'form' : FleetForm()
         }
-        return render(request, 'create_fleet.html', context = context)    
+        return render(request, 'create_fleet.html', context = context)   
+    
     elif request.method == 'POST':
-        form = FleetForm(request.POST)
+        form = FleetForm(request.POST, request.FILES)
         if form.is_valid():
-            Fleet.objects.create(aircraft= form.cleaned_data['aircraft'],
+            Fleet.objects.create(
+                acft_image = form.cleaned_data['acft_image'],
+                aircraft= form.cleaned_data['aircraft'],
                 iata_code =form.cleaned_data['iata_code'], 
-                seats = form.cleaned_data['seats'],               
-                
+                seats = form.cleaned_data['seats'],  
             )
             context = {
                 'message': 'Aeronave creada exitosamente'
@@ -48,25 +50,27 @@ def update_fleet(request,pk):
         context = {
             'form' : FleetForm(
                 initial={
+                    'acft_image': fleet.acft_image,
                     'aircraft': fleet.aircraft,
                     'iata_code':fleet.iata_code,
-                    'seats':fleet.seats ,                   
+                    'seats':fleet.seats                    
                 }                
             )
         }
         return render(request, 'update_fleet.html', context = context)   
      
     elif request.method == 'POST':
-        form = FleetForm(request.POST)
+        form = FleetForm(request.POST, request.FILES)
         if form.is_valid():
+            fleet.acft_image = form.cleaned_data['acft_image']
             fleet.aircraft= form.cleaned_data['aircraft']
             fleet.iata_code =form.cleaned_data['iata_code']
-            fleet.seats = form.cleaned_data['seats']               
+            fleet.seats = form.cleaned_data['seats']            
             fleet.save()    
             
             context = {
-                'message': 'Aeronave creada exitosamente'
-            }        
+                'message': 'Aeronave actualizada exitosamente'
+            }       
             
         else:
             context = {

@@ -15,7 +15,9 @@ def create_route(request):
     elif request.method == 'POST':
         form = RouteForm(request.POST)
         if form.is_valid():
-            Route.objects.create(route= form.cleaned_data['route'],
+            Route.objects.create(
+                route_image = form.cleaned_data['route_image'],
+                route= form.cleaned_data['route'],
                 iata_code =form.cleaned_data['iata_code'], 
                 domestico = form.cleaned_data['domestico'], 
                 internacional = form.cleaned_data['internacional'],              
@@ -42,12 +44,12 @@ def list_routes(request):
     return render(request, 'list_routes.html', context=context)
     
 def update_route(request, pk):
-    route = Route.objects.get(id=pk)
-    
+    route = Route.objects.get(id=pk)    
     if request.method == 'GET':
         context = {
             'form' : RouteForm(
                 initial={
+                'route_image':route.route_image,
                 'route': route.route,
                 'iata_code': route.iata_code ,
                 'domestico': route.domestico , 
@@ -58,8 +60,9 @@ def update_route(request, pk):
         return render(request, 'update_route.html', context = context)    
     
     elif request.method == 'POST':
-        form = RouteForm(request.POST)
+        form = RouteForm(request.POST,request.FILES)
         if form.is_valid():
+            route.route_image = form.cleaned_data['route_image']
             route.route= form.cleaned_data['route']
             route.iata_code =form.cleaned_data['iata_code']
             route.domestico = form.cleaned_data['domestico']
