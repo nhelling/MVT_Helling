@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 
 from MVT_Helling.settings import MEDIA_ROOT, MEDIA_URL
 from MVT_Helling.views import inicio, index,about_us
+from initial.views import list_initial
 
 
 urlpatterns = [
@@ -16,7 +17,7 @@ urlpatterns = [
     path('flights/', include('flights.url')),
     path('routes/', include('routes.url')),
     path('users/', include('users.url')),
-    path('initial/', include ('initial.url')),
+    #path('initial/', include ('initial.url')),
     
     
     

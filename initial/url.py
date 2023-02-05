@@ -1,7 +1,7 @@
 from django.urls import path
-from initial.views import imagen_inicio
+from initial.views import list_initial
 
 urlpatterns = [
-    path('index/', imagen_inicio),
+    path('index/', list_initial),
     
 ]

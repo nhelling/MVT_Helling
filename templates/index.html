@@ -9,7 +9,21 @@ Index
 {% block content %}
 <h1>   Bienvenidos a... </h1>
 <h1>    </h1>
-<img  src="{{imagen.initial_image.url}}" alt="" with = "400px" height = "400px" />
+
+<div class="card text-center" >
+    {% for inicio in initials %}
+    <img  src="{{inicio.initial_image.url}}" alt="" with = "500px" height = "500px" />
+    {% endfor %}
+
+    
+    <div class="card-body">
+      <h5 class="card-title">Aeropuerto Jorge Newbery</h5>
+     
+    </div>
+  </div>
+
+
+
 
 
 {% if message %}
