@@ -1,5 +1,5 @@
 from django.urls import path
-from fleet.views import create_fleet, list_fleet, update_fleet, FleetDeleteView
+from fleet.views import create_fleet, list_fleet, update_fleet, FleetDeleteView, FleetListView
 
 urlpatterns = [
     path('create_fleet/', create_fleet),

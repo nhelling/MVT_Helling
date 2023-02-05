@@ -8,4 +8,7 @@ def index(request):
 def inicio(request):
     return HttpResponse("Bienvenidos a Planificación de Vuelos AEP") 
 
+def about_us(request):
+    return render(request, 'about_us.html', context={})
+
 

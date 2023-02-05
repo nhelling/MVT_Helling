@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.views.generic import ListView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 from flights.models import Fligths
 from flights.forms import FlightForm
@@ -14,9 +14,11 @@ def create_fligth(request):
         return render(request, 'create_flight.html', context = context)
     
     elif request.method == 'POST':
-        form = FlightForm(request.POST)
+        form = FlightForm(request.POST, request.FILES)
         if form.is_valid():
-            Fligths.objects.create(aeropuerto = form.cleaned_data['aeropuerto'],
+            Fligths.objects.create(
+                flight_image = form.cleaned_data['flight_image'],
+                aeropuerto = form.cleaned_data['aeropuerto'],
                 tipo=form.cleaned_data['tipo'],
                 cia_vuelo = form.cleaned_data['cia_vuelo'],
                 acft = form.cleaned_data['acft'],
@@ -43,6 +45,7 @@ class FlightCreateView(CreateView):
     fields = '__all__'
     success_url = '/flights/list_fligths/'
 
+@login_required
 def list_fligths(request):
     if 'search' in request.GET:
         search = request.GET['search']
@@ -61,7 +64,7 @@ class FlightsListView(LoginRequiredMixin, ListView):
     template_name = 'list_fligths.html'
     
 
-
+@login_required
 def update_flight(request,pk):
     flight = Fligths.objects.get(id=pk)
     
@@ -69,6 +72,7 @@ def update_flight(request,pk):
         context = {
             'form' : FlightForm(                
                 initial={
+                    'flight_image':flight.flight_image,
                     'aeropuerto': flight.aeropuerto,
                     'tipo': flight.tipo,
                     'cia_vuelo': flight.cia_vuelo,
@@ -85,8 +89,9 @@ def update_flight(request,pk):
         return render(request, 'update_flight.html', context = context)
     
     elif request.method == 'POST':
-        form = FlightForm(request.POST)
-        if form.is_valid():            
+        form = FlightForm(request.POST, request.FILES)
+        if form.is_valid(): 
+            flight.flight_image = form.cleaned_data['flight_image']           
             flight.aeropuerto = form.cleaned_data['aeropuerto']
             flight.tipo = form.cleaned_data['tipo']
             flight.cia_vuelo = form.cleaned_data['cia_vuelo']
@@ -109,7 +114,7 @@ def update_flight(request,pk):
         return render(request, 'update_flight.html', context = context)
     
 
-class FlightDeleteView(DeleteView):
+class FlightDeleteView(LoginRequiredMixin, DeleteView):
     model = Fligths
     template_name = 'delete_flight.html'
     success_url = '/flights/list_fligths/'

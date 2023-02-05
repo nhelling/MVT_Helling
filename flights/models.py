@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+
 
 
 class Fligths(models.Model):
@@ -12,7 +12,7 @@ class Fligths(models.Model):
         ('EZE', 'EZE'),
         
     )
-    
+    flight_image = models.ImageField(upload_to= 'profile_images',null= True, blank= True, verbose_name = 'Imagen')
     aeropuerto = models.CharField(max_length=50, verbose_name= 'APTO')
     tipo = models.CharField(max_length=10, verbose_name= 'Tipo')
     cia_vuelo = models.CharField(max_length=10, verbose_name= 'CIA-Nro. Vuelo')

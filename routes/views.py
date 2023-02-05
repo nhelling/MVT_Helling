@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.views.generic import  DeleteView
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from routes.models import Route
 from routes.forms import RouteForm
@@ -42,7 +42,8 @@ def list_routes(request):
         'routes':all_routes,
     }
     return render(request, 'list_routes.html', context=context)
-    
+
+@login_required
 def update_route(request, pk):
     route = Route.objects.get(id=pk)    
     if request.method == 'GET':
@@ -80,7 +81,7 @@ def update_route(request, pk):
             }   
         return render(request, 'update_route.html', context = context)
 
-class RouteDeleteView(DeleteView):
+class RouteDeleteView(LoginRequiredMixin, DeleteView):
     model = Route
     template_name = 'delete_route.html'
     success_url = '/routes/list_routes/'   

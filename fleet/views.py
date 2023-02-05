@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.views.generic import DeleteView
+from django.views.generic import DeleteView, ListView
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from fleet.models import Fleet
 from fleet.forms import FleetForm
@@ -43,6 +43,9 @@ def list_fleet(request):
     }
     return render(request, 'list_fleet.html', context=context)
 
+class FleetListView(LoginRequiredMixin, ListView):
+    model = Fleet
+    template_name = 'list_fleet.html'
 
 def update_fleet(request,pk):
     fleet = Fleet.objects.get(id=pk)

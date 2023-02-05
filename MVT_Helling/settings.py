@@ -40,7 +40,8 @@ MY_APPS = [
     'flights',
     'fleet',
     'routes',
-    'users'
+    'users' ,
+    'initial' ,   
     
     
 ]

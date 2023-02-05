@@ -3,7 +3,7 @@ from flights.views import create_fligth,update_flight,FlightsListView,FlightCrea
 
 
 urlpatterns = [
-    path('create_fligth/',FlightCreateView.as_view()),
+    path('create_fligth/',create_fligth),
     path('list_fligths/',FlightsListView.as_view()),
     path('update_flight/<int:pk>/',update_flight),
     path('delete_flight/<int:pk>/',FlightDeleteView.as_view()),
